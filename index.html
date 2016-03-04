@@ -8,6 +8,14 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 	</head>
 	<body>
+		<div class='well well-info'>
+			choose a method to solve the ivp.
+			<select>
+				<option id='fem'>Forward Euler Method</option>
+				<option id="bem">Backward Euler Method</option>
+				<option id="mem">Modified Euler method</option>
+			</select>
+		</div>
 			<input type="text" id="a-b" placeholder="Input range (Eg: 1 10)" autofocus>
 			<input type="text" id="h" placeholder="Input step size">
 			<input type="Number" id="y" placeholder="Enter Initial Value">
@@ -18,17 +26,7 @@
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/script.js"></script>
 		<script>
-			$("#femactive").click(function(){
-				alert('hey madafaka');
-				$(this).preventDefault();
-				var a,b,h,y,xpoly,ypoly;
-				a = $("#a-b").val();
-				a = a.split(' ');
-				b = a[1];
-				a = a[0];
-				alert(a);
-				alert(b);
-			});
+
 		</script>
 	</body>
 </html>

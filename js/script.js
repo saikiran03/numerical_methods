@@ -116,11 +116,25 @@ function classical_rk_method(a, b, h, y, xpoly, ypoly){
 //MultiStep methods.
 
 function nystrom_central_difference_method(a, b, h, y, xpoly, ypoly){
-
+	var n = (b-a)/h;
+	var tmpy, results = classical_rk_method(a, a+h, h, y, xpoly, ypoly);
+	for(var i=1; i<n; i++){
+		tmpy = results[i-1] + 2*h*evaluate(a + (i*h), results[i], xpoly, ypoly);
+		results.push(Math.round(tmpy*multiplier)/multiplier);
+	}
+	return results;
 }
 
 function adam_bashforth_method(a, b, h, y, xpoly, ypoly){
-
+	var n = (b-a)/h;
+	var tmpy, results = classical_rk_method(a, a+h, h, y, xpoly, ypoly);
+	var fs = [evaluate(a, results[0], xpoly, ypoly), evaluate(a+h, results[1], xpoly, ypoly)];
+	for(var i=1; i<n; i++){
+		tmpy = results[i] + h*(3*fs[i] - fs[i-1])*0.5;
+		results.push(Math.round(tmpy*multiplier)/multiplier);
+		fs.push(Math.round(evaluate(a + (i+1)*h, results[i+1], xpoly, ypoly) * multiplier)/multiplier);
+	}
+	return results;
 }
 
 function adam_moutron_method(a, b, h, y, xpoly, ypoly){
@@ -131,8 +145,44 @@ function milne_simpson_method(a, b, h, y, xpoly, ypoly){
 
 }
 
-function milne_method(){
-
+function milne_method(a, b, h, y, xpoly, ypoly){
+	var results = classical_rk_method(a, a + 3*h, h, y, xpoly, ypoly);
+	var t,fs = [];
+	for(var i=0; i<4; i++){
+		t = evaluate(a + (i*h), results[i], xpoly, ypoly);
+		t = Math.round(t*multiplier)/multiplier;
+		fs.push(t);
+	}
+	return [fs,results];
 }
 
 //functions to render output to display
+
+function table_create(a, b, h, result){
+	var col_names = ['X<sub>i</sub>', 'Y<sub>i</sub>'];
+	var n = result.length;
+	var body = document.getElementsByTagName('body')[0];
+	var tbl = document.createElement("table");
+	var tblbody = document.createElement("tbody");
+	var head = document.createElement("thead");
+	var tit1 = document.createElement("td");
+	var data = document.createTextNode("X<sub>i</sub>");
+	tit1.appendChild(data);
+	head.appendChild(tit1);
+	tit1 = document.createElement("td");;
+	data = document.createTextNode("Y<sub>i</sub>");
+	tit1.appendChild(data);
+	head.appendChild(tit1);
+	for(var i=0; i<n; i++){
+		var row = document.createElement("tr");
+		for(var j=0; j<2; j++){
+			var cell = document.createElement("td");
+			var data = document.createTextNode("hey madafaka");
+			cell.appendChild(data);
+			row.appendChild(cell);
+		}
+		tblbody.appendChild(row);
+	}
+	tbl.appendChild(tblbody);
+	body.appendChild(tbl);
+}
