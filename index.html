@@ -6,27 +6,45 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Numerical Methods</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 	</head>
 	<body>
-		<div class='well well-info'>
-			choose a method to solve the ivp.
-			<select>
+	<div class="container">
+		<div class='well well-info text-center'>
+			<h3>Choose a method to solve the ivp:</h3>
+			<select class='form-control' style="margin-left:25%;width:50%;">
 				<option id='fem'>Forward Euler Method</option>
 				<option id="bem">Backward Euler Method</option>
 				<option id="mem">Modified Euler method</option>
 			</select>
 		</div>
-			<input type="text" id="a-b" placeholder="Input range (Eg: 1 10)" autofocus>
-			<input type="text" id="h" placeholder="Input step size">
-			<input type="Number" id="y" placeholder="Enter Initial Value">
-			<input type="text" id="xpoly" placeholder="Enter x coefficients">
-			<input type="text" id="ypoly" placeholder="Enter y coefficients">
-			<button class="btn btn-info" id="femactivate">Calculate</button>
+		<div class="panel panel-success">
+			<div class="panel-heading"></div>
+			<div class="panel-body">
+				<div class="form-group">
+					<input class="form-control" type="text" id="a-b" placeholder="Input range (Eg: 1 10)" autofocus>
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" id="h" placeholder="Input step size">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="Number" id="y" placeholder="Enter Initial Value">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" id="xpoly" placeholder="Enter x coefficients">
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" id="ypoly" placeholder="Enter y coefficients">
+				</div>
+				<button class="btn btn-info" id="femactivate">Calculate</button>
+			</div>
+		</div>
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/script.js"></script>
 		<script>
 
 		</script>
+	</div>
 	</body>
 </html>

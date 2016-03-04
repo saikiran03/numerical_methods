@@ -148,12 +148,18 @@ function milne_simpson_method(a, b, h, y, xpoly, ypoly){
 function milne_method(a, b, h, y, xpoly, ypoly){
 	var results = classical_rk_method(a, a + 3*h, h, y, xpoly, ypoly);
 	var t,fs = [];
+	var n = (b-a)/h;
 	for(var i=0; i<4; i++){
 		t = evaluate(a + (i*h), results[i], xpoly, ypoly);
 		t = Math.round(t*multiplier)/multiplier;
 		fs.push(t);
 	}
-	return [fs,results];
+	for(var i=3; i<n; i++){
+		t = results[i-3] + 4*h*(2*fs[i] - fs[i-1] +2*fs[i-2]);
+		t = Math.round(t*multiplier)/multiplier;
+		results.push(t);
+	}
+	return results;
 }
 
 //functions to render output to display
