@@ -11,39 +11,51 @@
 	<body>
 	<div class="container">
 		<div class='well well-info text-center'>
-			<h3>Choose a method to solve the ivp:</h3>
-			<select class='form-control' style="margin-left:25%;width:50%;">
+			<h3>Choose a method to solve the IVP:</h3>
+			<select class='form-control' id="method" style="margin-left:25%;width:50%;">
 				<option id='fem'>Forward Euler Method</option>
 				<option id="bem">Backward Euler Method</option>
 				<option id="mem">Modified Euler method</option>
+				<option id="rk">Classical RK Method</option>
 			</select>
 		</div>
 		<div class="panel panel-success">
 			<div class="panel-heading"></div>
 			<div class="panel-body">
+				<div class="alert alert-danger text-center h4">
+					y'(x) = ( a<sub>0</sub> + a<sub>1</sub>x + a<sub>2</sub>x<sup>2</sup> + ... + a<sub>n</sub>x<sup>n</sup> ) + (b<sub>0</sub> + b<sub>1</sub>y + b<sub>2</sub>y<sup>2</sup> + ... + b<sub>m</sub>y<sup>m</sup> )<br><br>
+					x &#8712; [a,b]
+				</div>
 				<div class="form-group">
+					<label>a b</label>
 					<input class="form-control" type="text" id="a-b" placeholder="Input range (Eg: 1 10)" autofocus>
 				</div>
 				<div class="form-group">
+					<label>h</label>
 					<input class="form-control" type="text" id="h" placeholder="Input step size">
 				</div>
 				<div class="form-group">
+					<label>Y<sub>0</sub></label>
 					<input class="form-control" type="Number" id="y" placeholder="Enter Initial Value">
 				</div>
 				<div class="form-group">
+					<label>a<sub>0</sub> a<sub>1</sub> a<sub>2</sub> a<sub>3</sub> ...</label>
 					<input class="form-control" type="text" id="xpoly" placeholder="Enter x coefficients">
 				</div>
 				<div class="form-group">
+					<label>b<sub>0</sub> b<sub>1</sub> b<sub>2</sub> b<sub>3</sub> ...</label>
 					<input class="form-control" type="text" id="ypoly" placeholder="Enter y coefficients">
 				</div>
-				<button class="btn btn-info" id="femactivate">Calculate</button>
+				<button class="btn btn-info" onclick="calculate()">Calculate</button>
 			</div>
 		</div>
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/script.js"></script>
 		<script>
-
+			$("#method").click(function(){
+				$(".panel-heading").html("<h4>"+$("#method").val()+"</h4>");
+			});
 		</script>
 	</div>
 	</body>

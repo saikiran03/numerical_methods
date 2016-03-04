@@ -1,6 +1,8 @@
 const accuracy = 4;
 const multiplier = Math.pow(10,accuracy);
 
+var a, b, h, y, xpoly, ypoly;
+
 //Evaluation functions.
 
 function evaluate(x, y, xpoly, ypoly){
@@ -145,11 +147,12 @@ function milne_simpson_method(a, b, h, y, xpoly, ypoly){
 
 }
 
+// not working.
 function milne_method(a, b, h, y, xpoly, ypoly){
 	var results = classical_rk_method(a, a + 3*h, h, y, xpoly, ypoly);
 	var t,fs = [];
 	var n = (b-a)/h;
-	for(var i=0; i<4; i++){
+	for(var i=0; i<3; i++){
 		t = evaluate(a + (i*h), results[i], xpoly, ypoly);
 		t = Math.round(t*multiplier)/multiplier;
 		fs.push(t);
@@ -191,4 +194,41 @@ function table_create(a, b, h, result){
 	}
 	tbl.appendChild(tblbody);
 	body.appendChild(tbl);
+}
+
+function calculate(){
+	initialize_variables();
+	var res,method = $("#method").val();
+	switch(method){
+		case "forward euler method":
+			res = forward_euler_method(a, b, h, y, xpoly, ypoly);
+			break;
+		case "backward euler method":
+			res = backward_euler_method(a, b, h, y, xpoly, ypoly);
+			break;
+		case "modified euler method":
+			res = modified_euler_method(a, b, h, y, xpoly, ypoly);
+			break;
+		case "Classical RK method":
+			res = classical_rk_method(a, b, h, y, xpoly, ypoly);
+			break;
+	}
+	console.log(res);
+	return;
+}
+
+function initialize_variables(){
+	a = $("#a-b").val().split(' ')[0]-'0';
+	b = $("#a-b").val().split(' ')[1]-'0';
+	h = $("#h").val();
+	y = $("#y").val()-'0';
+	xpoly = $("#xpoly").val().split(' ');
+	for(var i=0; i<xpoly.length; i++){
+		xpoly[i] -= '0';
+	}
+	ypoly = $("#ypoly").val().split(' ');
+	for(var i=0; i<ypoly.length; i++){
+		ypoly[i] -= '0';
+	}
+	return;
 }
