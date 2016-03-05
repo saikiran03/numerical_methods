@@ -232,3 +232,41 @@ function initialize_variables(){
 	}
 	return;
 }
+
+function generate_data(a, b, h, results){
+	var x = a, t = [], data = [];
+	for(var i=0; i<results.length; i++, x+=h){
+		t = [Math.round(x*multiplier)/multiplier,results[i]];
+		data.push(t);
+	}
+	return data;
+}
+
+function plot_graph(points){
+	$("#container").show();
+	$(function () {
+		$('#container').highcharts({
+			chart: { type: 'spline' },
+			title: { text: 'Classical RK Method' },
+			subtitle: { text: '====' },
+			xAxis: {
+				title: { text: 'x' },
+				min: 0
+			},
+			yAxis: {
+				title: { text: 'y(x)' },
+				min: 0
+			},
+			plotOptions: {
+				spline: {
+					marker: { enabled: true }
+				}
+			},
+			series: [{
+				name: "My Plot",
+				data: points
+			}]
+		});
+	});
+	return;
+}

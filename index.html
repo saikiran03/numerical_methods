@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Numerical Methods</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!--<link href="css/bootstrap-theme.min.css" rel="stylesheet">-->
 		<link href="css/style.css" rel="stylesheet">
 	</head>
 	<body>
@@ -49,8 +50,11 @@
 				<button class="btn btn-info" onclick="calculate()">Calculate</button>
 			</div>
 		</div>
+		<div id="container" style="min-width: 310px; height:400px; margin:0 auto; display:none;"></div>
 		<script src="js/jquery.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
 		<script src="js/script.js"></script>
 		<script>
 			$("#method").click(function(){
