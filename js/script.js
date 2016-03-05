@@ -1,7 +1,8 @@
 const accuracy = 4;
 const multiplier = Math.pow(10,accuracy);
 
-var a, b, h, y, xpoly, ypoly;
+var a, b, h, y, xpoly, ypoly, minx, miny;
+minx = miny = Infinity;
 
 //Evaluation functions.
 
@@ -199,28 +200,39 @@ function table_create(a, b, h, result){
 function calculate(){
 	initialize_variables();
 	var res,method = $("#method").val();
-	switch(method){
-		case "forward euler method":
-			res = forward_euler_method(a, b, h, y, xpoly, ypoly);
-			break;
-		case "backward euler method":
-			res = backward_euler_method(a, b, h, y, xpoly, ypoly);
-			break;
-		case "modified euler method":
-			res = modified_euler_method(a, b, h, y, xpoly, ypoly);
-			break;
-		case "Classical RK method":
-			res = classical_rk_method(a, b, h, y, xpoly, ypoly);
-			break;
+	if(method==1){
+		res = forward_euler_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==2){
+		res = backward_euler_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==3){
+		res = modified_euler_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==4){
+		res = euler_cauchy_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==5){
+		res = second_order_rk_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==6){
+		res = classical_rk_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==7){
+		res = nystrom_central_difference_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==8){
+		res = adam_bashforth_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==9){
+		res = adam_moutron_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==10){
+		res = milne_simpson_method(a, b, h, y, xpoly, ypoly);
+	}else if(method==11){
+		res = milne_method(a, b, h, y, xpoly, ypoly);
 	}
-	console.log(res);
+	initialize_variables();
+	var points = generate_data(a,b,h,res);
+	plot_graph(points);
 	return;
 }
 
 function initialize_variables(){
 	a = $("#a-b").val().split(' ')[0]-'0';
 	b = $("#a-b").val().split(' ')[1]-'0';
-	h = $("#h").val();
+	h = $("#h").val()-'0';
 	y = $("#y").val()-'0';
 	xpoly = $("#xpoly").val().split(' ');
 	for(var i=0; i<xpoly.length; i++){
@@ -236,7 +248,9 @@ function initialize_variables(){
 function generate_data(a, b, h, results){
 	var x = a, t = [], data = [];
 	for(var i=0; i<results.length; i++, x+=h){
-		t = [Math.round(x*multiplier)/multiplier,results[i]];
+		x = Math.round(x*multiplier)/multiplier;
+		miny = Math.min(miny, results[i]);
+		t = [x,results[i]];
 		data.push(t);
 	}
 	return data;
@@ -251,11 +265,11 @@ function plot_graph(points){
 			subtitle: { text: '====' },
 			xAxis: {
 				title: { text: 'x' },
-				min: 0
+				min: a
 			},
 			yAxis: {
 				title: { text: 'y(x)' },
-				min: 0
+				min: miny
 			},
 			plotOptions: {
 				spline: {
