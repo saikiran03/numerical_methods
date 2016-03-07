@@ -66,7 +66,8 @@
 		<script src="js/script.js"></script>
 		<script>
 			$("#method").click(function(){
-				$(".panel-heading").html("<h4>"+$("#method").val()+"</h4>");
+				graph_title = $(this).find("option:selected").text();
+				$(".panel-heading").html(graph_title);
 			});
 		</script>
 	</div>

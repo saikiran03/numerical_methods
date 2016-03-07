@@ -1,7 +1,7 @@
 const accuracy = 4;
 const multiplier = Math.pow(10,accuracy);
 
-var a, b, h, y, xpoly, ypoly, minx, miny;
+var a, b, h, y, xpoly, ypoly, minx, miny, graph_title;
 minx = miny = Infinity;
 
 //Evaluation functions.
@@ -261,8 +261,8 @@ function plot_graph(points){
 	$(function () {
 		$('#container').highcharts({
 			chart: { type: 'spline' },
-			title: { text: 'Classical RK Method' },
-			subtitle: { text: '====' },
+			title: { text: graph_title },
+			subtitle: { text: 'h = '+h },
 			xAxis: {
 				title: { text: 'x' },
 				min: a
@@ -277,7 +277,7 @@ function plot_graph(points){
 				}
 			},
 			series: [{
-				name: "My Plot",
+				name: "Y<sub>j</sub>",
 				data: points
 			}]
 		});
