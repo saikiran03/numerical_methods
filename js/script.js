@@ -224,6 +224,7 @@ function calculate(){
 		res = milne_method(a, b, h, y, xpoly, ypoly);
 	}
 	initialize_variables();
+	graph_title = $(this).find("option:selected").text();
 	var points = generate_data(a,b,h,res);
 	plot_graph(points);
 	return;
