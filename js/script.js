@@ -243,6 +243,8 @@ function initialize_variables(){
 	for(var i=0; i<ypoly.length; i++){
 		ypoly[i] -= '0';
 	}
+	graph_title = $("#method").find("option:selected").text();
+	console.log(graph_title);
 	return;
 }
 

@@ -20,7 +20,7 @@
 				<option value="4" disabled>Euler Cauchy Method</option>
 				<option value="5">Second Order RK Method</option>
 				<option value="6">Classical RK Method</option>
-				<option>==============</option>
+				<option disabled>==============</option>
 				<option value="7">Nystrom Central Difference Method</option>
 				<option value="8">Adam Bashforth Method</option>
 				<option value="9" disabled>Adam-Moultron Method</option>
@@ -65,10 +65,10 @@
 		<script src="https://code.highcharts.com/modules/exporting.js"></script>
 		<script src="js/script.js"></script>
 		<script>
-			$("#method").click(function(){
-				graph_title = $(this).find("option:selected").text();
-				$(".panel-heading").html(graph_title);
-			});
+			// $("#method").click(function(){
+			// 	graph_title = $("#method").find("option:selected").text();
+			// 	$(".panel-heading").html(graph_title);
+			// });
 		</script>
 	</div>
 	</body>
