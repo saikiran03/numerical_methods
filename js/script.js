@@ -1,5 +1,6 @@
 const accuracy = 4;
 const multiplier = Math.pow(10,accuracy);
+const error = 0.001;
 
 var a, b, h, y, xpoly, ypoly, minx, miny, graph_title;
 minx = miny = Infinity;
@@ -19,7 +20,7 @@ function evaluate(x, y, xpoly, ypoly){
 
 function bem_iterator(x, y, yk, h, xpoly, ypoly){
 	var yn = y + h*evaluate(x, yk, xpoly, ypoly);
-	if(Math.abs(yn-yk) > 0.01){
+	if(Math.abs(yn-yk) > error){
 		return bem_iterator(x, y, yn, h, xpoly, ypoly);
 	}else{
 		return yn;
@@ -28,7 +29,7 @@ function bem_iterator(x, y, yk, h, xpoly, ypoly){
 
 function mem_iterator(x, y, f, h, yk, xpoly, ypoly){
 	var yn = y + h*(f + evaluate(x+h, yk, xpoly, ypoly))*0.5;
-	if(Math.abs(yn-yk) > 0.01){
+	if(Math.abs(yn-yk) > error){
 		return mem_iterator(x, y, f, h, yn, xpoly, ypoly);
 	}else{
 		return yn;
@@ -38,7 +39,7 @@ function mem_iterator(x, y, f, h, yk, xpoly, ypoly){
 function implicit_rk_iterator(x, y, h, kn, xpoly, ypoly){
 	var k;
 	k = evaluate(x + h*0.5, y + (h*kn*0.5), xpoly, ypoly);
-	if(Math.abs(kn-k) > 0.01){
+	if(Math.abs(kn-k) > error){
 		return implicit_rk_iterator(x, y, h, k, xpoly, ypoly);
 	}else{
 		return k;
