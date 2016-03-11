@@ -16,7 +16,7 @@
 			<select class='form-control' id="method" style="margin-left:25%;width:50%;">
 				<option value="1">Forward Euler Method</option>
 				<option value="2">Backward Euler Method</option>
-				<option value="3" disabled>Modified Euler method</option>
+				<option value="3">Modified Euler method</option>
 				<option value="4" disabled>Euler Cauchy Method</option>
 				<option value="5">Second Order RK Method</option>
 				<option value="6">Classical RK Method</option>
@@ -65,10 +65,10 @@
 		<script src="https://code.highcharts.com/modules/exporting.js"></script>
 		<script src="js/script.js"></script>
 		<script>
-			// $("#method").click(function(){
-			// 	graph_title = $("#method").find("option:selected").text();
-			// 	$(".panel-heading").html(graph_title);
-			// });
+			$("#method").click(function(){
+				graph_title = $("#method").find("option:selected").text();
+				$(".panel-heading").html(graph_title);
+			});
 		</script>
 	</div>
 	</body>

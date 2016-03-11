@@ -73,8 +73,8 @@ function modified_euler_method(a, b, h, y, xpoly, ypoly){
 	var tmpy, n = (b-a)/h;
 	var results = [y];
 	for(var i=0; i<n; i++){
-		tmpy = mem_iterator(a+(i*h), results[i], evaluate(a+(i*h), results[i]), h, results[i], xpoly, ypoly);
-		results.push(Math.round(tmpy*multiplier)*multiplier);
+		tmpy = mem_iterator(a+(i*h), results[i], evaluate(a+(i*h), results[i], xpoly, ypoly), h, results[i], xpoly, ypoly);
+		results.push(Math.round(tmpy*multiplier)/multiplier);
 	}
 	return results;
 }
